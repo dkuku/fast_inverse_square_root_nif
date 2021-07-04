@@ -12,7 +12,7 @@ defmodule FastInvSqrNif do
       :world
 
   """
-  def hello do
-    :world
+  def calculate(float) do
+    1/:math.sqrt(float)
   end
 end
