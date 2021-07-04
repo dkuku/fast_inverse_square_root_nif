@@ -10,33 +10,14 @@ defmodule FISR.Nif do
     :ok = :erlang.load_nif(path, 1)
   end
 
+  def fisr_ex(float), do: 1 / :math.sqrt(float)
+
   # A simple wrapper around the NIF call
-  def fisr(float) do
-    1 / :math.sqrt(float)
-  end
-
-  def fisrnif(float) do
-    _fisr(float)
-  end
-
-  def fisr1(float) do
-    _fisr1(float)
-  end
-
-  def fisr2(float) do
-    _fisr2(float)
-  end
+  def fisr(int) when is_integer(int), do: fisr(int * 1.0)
+  def fisr(float), do: _fisr(float)
 
   # This function will not be overwritten if the nif fails to load
   def _fisr(_) do
-    exit(:nif_library_not_loaded)
-  end
-
-  def _fisr1(_) do
-    exit(:nif_library_not_loaded)
-  end
-
-  def _fisr2(_) do
     exit(:nif_library_not_loaded)
   end
 end
